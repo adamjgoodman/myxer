@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6 rounded-lg m-3">
+<nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6 rounded-lg ml-3 mr-3 mt-2 mb-2">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
     <span class="fas fa-lg fa-user-slash"></span>
     <span class="ml-1 font-bold text-xl tracking-tight">myxer</span>
@@ -12,5 +12,13 @@
     <div class="text-sm lg:flex-grow">
         <%= link_to 'Home', root_path, class: "block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4" %>
     </div>
+  </div>
+  <div>
+    <% if user_signed_in? %>
+      <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0' %>
+    <% else %>
+      <%= link_to 'Sign in', new_user_session_path, class: 'nline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0' %>
+      <%= link_to 'Sign up', new_user_registration_path, class: 'nline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0' %>
+    <% end %>
   </div>
 </nav>

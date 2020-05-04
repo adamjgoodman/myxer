@@ -8,7 +8,12 @@ class MyxesController < ApplicationController
   end
   
   def create
-    @myx = Myx.create(myx_params)
+    @myx = current_user.myxes.create(myx_params)
+    if @gram.valid?
+			redirect_to root_path
+		else
+			render :new, status: :unprocessable_entity
+		end
   end
 
   private
