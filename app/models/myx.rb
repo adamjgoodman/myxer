@@ -1,0 +1,2 @@
+class Myx < ApplicationRecord
+end

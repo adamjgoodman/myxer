@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Myxer</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_pack_tag    'application' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="min-h-screen bg-gray-200">
+    <%= render partial: '/layouts/navbar' %>
+    <div class="container mx-auto bg-gray-100 border-solid border border-gray-400 rounded">
+      <%= yield %>
+    </div>
+  </body>
+</html>

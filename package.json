@@ -1,0 +1,11 @@
+{
+  "name": "myxer",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "^5.1.1",
+    "tailwindcss": "~1.0.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.10.3"
+  }
+}
