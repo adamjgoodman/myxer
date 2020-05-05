@@ -1,13 +1,20 @@
+<script>
+  $( ".myxes" ).ready(function() {
+    $( ".myxes" ).fadeIn( "medium" );
+  });
+</script>
+  
   <% if user_signed_in? %>
     <%= render partial: 'new' %>
   <% end %>
   <br />
+  
   <div class="mb-2 container w-2/3 mx-auto text-2xl text-teal-800 font-bold">
     Whats new?
   </div>
 
   <% @myx.each do |myx| %>
-    <div id="myxes" class="container w-2/3 pt-6 pl-10 pr-10 pb-8 mx-auto bg-white bg-opacity-75 border-solid border border-gray-400 rounded">
+    <div class="myxes container w-2/3 pt-6 pl-10 pr-10 pb-8 mx-auto bg-white bg-opacity-75 border-solid border border-gray-400 rounded">
       <div class="text-teal-800 text-sm font-bold mb-2">
         <%= myx.user.username %>
       </div>
@@ -17,3 +24,5 @@
     </div>
     <br />
   <% end %>
+
+  

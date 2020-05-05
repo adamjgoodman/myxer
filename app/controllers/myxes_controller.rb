@@ -1,6 +1,6 @@
 class MyxesController < ApplicationController
   def index
-    @myx = Myx.all
+    @myx = Myx.all.order("created_at DESC")
   end
   
   def create

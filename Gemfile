@@ -67,3 +67,5 @@ gem 'tailwindcss', '~> 1.0.0'
 gem 'font_awesome5_rails'
 
 gem 'devise'
+
+gem 'jquery-rails'

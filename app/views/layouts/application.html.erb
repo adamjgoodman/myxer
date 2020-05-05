@@ -8,6 +8,7 @@
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
   </head>
 
   <body class="min-h-screen bg-gray-200">
@@ -19,6 +20,7 @@
     <% if alert.present? %>
       <p class="bg-red-100 border border-red-400 text-red-700 mt-1 mb-2 px-4 py-3 rounded relative"><%= alert %></p>
     <% end %>
-      <%= yield %>
+    <%= render partial: "../views/devise/shared/signup" %>
+    <%= yield %>
   </body>
 </html>
