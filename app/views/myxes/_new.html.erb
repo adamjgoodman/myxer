@@ -1,3 +1,7 @@
-<div class="container mx-auto bg-gray-100 border-solid border border-gray-400 rounded">
-  Hi!
+<div class="container mx-auto w-2/3">
+  <%= form_with model: Myx.new do |form| %>
+    <%= form.text_area :message, maxlength: 200, placeholder: 'What did your ex do now?', class: 'h-20 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    <br />
+    <%= form.submit 'Submit', remote: true, class: 'bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-full' %>
+  <% end %>
 </div>

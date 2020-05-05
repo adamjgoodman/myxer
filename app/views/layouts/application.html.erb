@@ -13,11 +13,11 @@
   <body class="min-h-screen bg-gray-200">
     <%= render partial: '/layouts/navbar' %>
     <% if notice.present? %>
-      <p class="ml-4 mr-4 bg-teal-100 border border-teal-400 text-teal-700 mt-1 mb-1 px-4 py-3 rounded relative"><%= notice %></p>
+      <p class="ml-4 mr-4 bg-teal-100 border border-teal-400 text-teal-700 mt-1 mb-2 px-4 py-3 rounded relative"><%= notice %></p>
     <% end %> 
 
     <% if alert.present? %>
-      <p class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"><%= alert %></p>
+      <p class="bg-red-100 border border-red-400 text-red-700 mt-1 mb-2 px-4 py-3 rounded relative"><%= alert %></p>
     <% end %>
       <%= yield %>
   </body>

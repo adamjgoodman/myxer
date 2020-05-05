@@ -1,7 +1,19 @@
-  <%= render partial: 'new' %>
+  <% if user_signed_in? %>
+    <%= render partial: 'new' %>
+  <% end %>
   <br />
-  <div class="container mx-auto bg-gray-100 border-solid border border-gray-400 rounded">
-    <% @myx.each do |myx| %>
-      <%= myx.message %>
-    <% end %>
+  <div class="mb-2 container w-2/3 mx-auto text-2xl text-teal-800 font-bold">
+    Whats new?
   </div>
+
+  <% @myx.each do |myx| %>
+    <div id="myxes" class="container w-2/3 pt-6 pl-10 pr-10 pb-8 mx-auto bg-white bg-opacity-75 border-solid border border-gray-400 rounded">
+      <div class="text-teal-800 text-sm font-bold mb-2">
+        <%= myx.user.username %>
+      </div>
+      <div class="text-sm text-gray-700 pl-4">
+        <%= myx.message %>
+      </div>
+    </div>
+    <br />
+  <% end %>
