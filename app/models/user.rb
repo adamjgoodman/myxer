@@ -1,11 +1,18 @@
 class User < ApplicationRecord
   has_many :myxes
+  has_one :profile
+  after_create :make_profile
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:login]
 
   attr_writer :login
+
+  def make_profile
+    profile = Profile.create(user_id: self.id)
+    profile.save!
+  end
 
   def login
     @login || self.username || self.email

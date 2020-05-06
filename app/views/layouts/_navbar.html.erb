@@ -17,8 +17,8 @@
     <% if user_signed_in? %>
       <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0' %>
     <% else %>
-      <%= link_to 'Sign in', new_user_session_path, class: 'inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0' %>
-      <button class='inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0' id="sign_up">Sign Up</button>
+      <button class='inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0 sign_in' id="sign_in">Sign In</button>
+      <button class='inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0 sign_up' id="sign_up">Sign Up</button>
     <% end %>
   </div>
 </nav>
