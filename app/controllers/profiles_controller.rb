@@ -5,10 +5,21 @@ class ProfilesController < ApplicationController
   end
   
   def show
-    @profile = Profile.find_by(params[:id])
-    @user = User.find_by(id: @profile.user_id.to_i)
-    @myxes = Myx.where(user_id: @user.id)
   end
+
+  def edit
+    @profile = Profile.find_by(params[:id])
+  end
+
+  def update
+		@profile = Profile.find_by(params[:id])
+    @profile.update_attributes(profile_params)
+		if @profile.valid?
+			redirect_to user_path(current_user)
+		else
+			return render :edit, status: :unprocessable_entity
+		end
+	end
 
   private 
 

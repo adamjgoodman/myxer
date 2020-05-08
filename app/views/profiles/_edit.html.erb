@@ -1,0 +1,13 @@
+<div class="edit_profile hidden pl-4 pr-4">
+  <%= form_with model: Profile.find_by(user_id: current_user.id), url: user_profile_path(current_user) do |form| %>
+    <div class="w-1/12 inline-block">Location:</div> <%= form.text_field :location, maxlength: 150, placeholder: 'Location', class:'mb-2 ml-2 text-xs w-1/6 bg-gray-300 appearance-none rounded py-1 px-4 text-gray-800 leading-tight focus:outline-none focus:bg-white' %>
+    <br />
+    <div class="w-1/12 inline-block">Status:</div> <%= form.select :status, [ ['Single'], ['Relationship'], ['Situationship'] ], {prompt: "Relationship Status"}, {class:'mb-2 dropdown ml-2 text-xs w-1/6 bg-gray-300 appearance-none rounded py-1 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white'} %>
+    <br />
+    <div class="w-1/12 inline-block">Bio:</div> <%= form.text_area :bio, maxlength: 200, placeholder: '200 characters max', class:'absolute ml-3 text-xs w-1/4 bg-gray-300 appearance-none rounded py-1 px-4 text-gray-800 leading-tight focus:outline-none focus:bg-white' %>
+    <br /><br />
+
+    <%= form.submit "Save", class:'mb-3 inline-block bg-white text-teal-500 text-xs px-3 py-1 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0 cursor-pointer' %>
+
+  <% end %>
+</div>
