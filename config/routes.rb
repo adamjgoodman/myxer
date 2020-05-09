@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   resources :myxes
   resources :users do
     resource  :profile
+    resource :chat
   end
+  resources :chats
 end

@@ -1,6 +1,13 @@
 <div class="container mx-auto bg-teal-500 rounded-lg text-white p-5">
   <div class="text-xl font-bold">
-    <%= @user.username %><br />
+    <%= @user.username %>
+    <%= form_with model: @chat do |form| %>
+        <%= form.hidden_field :sender_id, value: current_user.id %>
+        <%= form.hidden_field :receiver_id, value: @user.id %>
+        <%= form.submit %>
+      <% end %>
+      <i class="fas fa-envelope"></i> 
+    <br />
       <% if @user = current_user %>
         <button id="edit" class="mb-3 inline-block text-xs px-1 py-1 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
           Edit Profile

@@ -4,5 +4,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @profile = @user.profile
     @myxes = Myx.where(user_id: @user.id)
+    @chat = Chat.new
   end
 end
