@@ -4,7 +4,9 @@
       <i id="in-close" class="fas fa-window-close text-white text-3xl cursor-pointer", style="margin-left:85%;"></i>
       <h1 class="text-2xl text-white font-bold">Send Message</h1><br />
       <%= form_with model: @message do |form| %>
-        <%= form.text_area :body %>  
+        <%= form.text_area :body %>
+        <%= form.submit %>  
       <% end %>
+      <%= link_to 'Discard', @chat.destroy %>
     </div>
   </div>

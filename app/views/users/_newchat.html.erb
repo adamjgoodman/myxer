@@ -1,0 +1,15 @@
+<div class="message_box hidden modal-overlay absolute rounded-lg w-full h-full bg-gray-200 opacity-75"></div>
+  <div class="message_box inline rounded px-8 pt-6 pb-8 mb-4 text-center" style="display: contents;"> 
+    <div class="pt-10 pb-10 message_box modal mx-auto object-center hidden bg-white rounded-lg">
+      <i id="up-close" class="fas fa-window-close text-teal-500 text-3xl cursor-pointer", style="margin-left:85%;"></i>
+      <h1 class="text-teal-500 text-xl ml-20 pl-2 mb-4 text-left font-bold">Send Message</h1>
+      <%= form_with model: @chat do |form| %>
+        <%= form.hidden_field :sender_id, value: current_user.id %>
+        <%= form.hidden_field :receiver_id, value: @user.id %>
+        <%= form.text_area :first_message, placeholder: 'Say a few words...', class: 'p-2 rounded bg-gray-200 w-3/4', style: 'height: 100px;' %>
+        <br />
+        <%= form.submit 'Send', class:'cursor-pointer mt-2 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-full' %>
+      <% end %>
+    </div>
+  </div>
+</div>
