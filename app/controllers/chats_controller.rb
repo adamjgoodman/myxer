@@ -1,17 +1,23 @@
 class ChatsController < ApplicationController
 
+  def index
+    @chats = Chat.where(sender_id: current_user.id) || Chat.where(receiver_id: current_user.id)
+  end
+
   def new 
     @chats = Chat.new
   end
 
   def show
     @chat = Chat.find(params[:id])
+    @message = Message.new
+    @messages = @chat.messages.order('created_at DESC')
   end
 
   def create
     @chat = Chat.create(chat_params)
     if @chat.valid?
-      redirect_to chat_path(@chat)
+      redirect_to user_path(@chat.receiver_id)
     end
   end
 

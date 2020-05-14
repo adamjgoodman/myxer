@@ -1,12 +1,38 @@
-<div class="modal-overlay absolute rounded-lg w-full h-full bg-gray-200 opacity-75"></div>
-  <div class="rounded mt-4 px-8 pt-6 pb-8 mb-4 text-center", style="display:contents;"> 
-    <div class="pt-10 pb-10 modal mx-auto object-center bg-teal-500 rounded-lg">
-      <i id="in-close" class="fas fa-window-close text-white text-3xl cursor-pointer", style="margin-left:85%;"></i>
-      <h1 class="text-2xl text-white font-bold">Send Message</h1><br />
-      <%= form_with model: @message do |form| %>
-        <%= form.text_area :body %>
-        <%= form.submit %>  
-      <% end %>
-      <%= link_to 'Discard', @chat.destroy %>
-    </div>
+<div class="mt-4 container w-2/3 pt-6 pl-10 pr-10 pb-10 mx-auto bg-white bg-opacity-75 border-solid border border-gray-400 rounded">
+  <div class="text-2xl text-teal-500 font-bold">
+    Direct Message 
   </div>
+  <% @messages.each do |message| %>
+    <% @user = User.find_by(id: message.user_id) %>
+    <% if @user == current_user %>
+      <div class="bg-teal-500 text-white border border-solid border-teal-600 rounded text-right mt-4 ml-64 py-2 px-6">
+        <div class="text-xs font-bold text-gray-100">
+          <%= @user.username %>
+        </div>
+        <%= message.body %>
+      </div>
+      <div class="text-xs text-right mr-1 text-gray-500">
+        <%= message.created_at.strftime('%B %d, %Y, %l:%M%p') %>
+      </div>
+    <% else %>
+      <div class="bg-gray-100 text-teal-600 border border-solid border-gray-500 rounded text-left mt-4 mr-64 py-2 px-6">
+        <div class="text-xs font-bold text-teal-500">
+          <%= @user.username %>
+        </div>
+        <%= message.body %>
+      </div>
+      <div class="text-xs text-left ml-1 text-teal-500 opacity-50">
+        <%= message.created_at.strftime('%B %d, %Y, %l:%M%p') %>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>
+
+<div class="mt-4 container w-1/2 pt-6 pl-10 pr-10 pb-6 mx-auto bg-white bg-opacity-75 border-solid border border-gray-400 rounded">
+  <%= form_with model: @message, url: chat_message_path(@chat) do |form| %>
+    <%= form.text_area :body, placeholder: 'Go ahead...Complain about your ex...Again..', class: 'p-2 ml-auto mr-auto rounded bg-gray-200 w-full', style: 'height: 100px;' %>
+    <br />
+    <%= form.submit 'Submit', remote: true, class:'cursor-pointer mt-2 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-full' %>
+  <% end %>
+</div>

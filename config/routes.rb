@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     resource  :profile
     resource :chat
   end
-  resources :chats
+  resources :chats do
+    resource :message
+  end
 end

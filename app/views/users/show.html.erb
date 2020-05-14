@@ -1,14 +1,23 @@
 <div class="container mx-auto bg-teal-500 rounded-lg text-white p-5">
   <div class="text-xl font-bold">
 
-    <%= @user.username %> <button><i id="message" class="ml-1 fas fa-envelope"></i></button>
+    <%= @user.username %>
+    <% if @ourchat.present? %>
+      <%= link_to chat_path(@ourchat) do %>
+        <i class="ml-3 fas fa-envelope align-middle"></i></button> 
+        <span class="text-xs align-middle">Direct Message</span>
+      <% end %>
+    <% elsif @profile.user_id != current_user.id %>
+      <button><i id="message" class="ml-1 fas fa-envelope"></i></button>
+    <% end %>
     <br />
 
-      <% if @user = current_user %>
-        <button id="edit" class="mb-3 inline-block text-xs px-1 py-1 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
-          Edit Profile
-        </button>
-      <% end %>
+    <% if @user == current_user %>
+      <button id="edit" class="mb-3 inline-block text-xs px-1 py-1 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+        Edit Profile
+      </button>
+    <% end %>
+
   </div>
   <%= render partial: "../views/profiles/edit" if @user = current_user %>
   <div class="profile pl-4 pr-4">
