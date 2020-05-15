@@ -1,7 +1,8 @@
 class ChatsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :show] 
 
   def index
-    @chats = Chat.where(sender_id: current_user.id) || Chat.where(receiver_id: current_user.id)
+    @chats = current_user.chats
   end
 
   def new 
@@ -10,8 +11,11 @@ class ChatsController < ApplicationController
 
   def show
     @chat = Chat.find(params[:id])
+    unless [@chat.receiver_id, @chat.sender_id].include? current_user.id
+      redirect_to root_path, alert: 'Not allowed.'
+    end
     @message = Message.new
-    @messages = @chat.messages.order('created_at DESC')
+    @messages = @chat.messages.order('created_at DESC').reverse
   end
 
   def create

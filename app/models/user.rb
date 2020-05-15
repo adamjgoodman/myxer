@@ -2,16 +2,18 @@ class User < ApplicationRecord
   has_many :myxes
   has_one :profile
   after_create :make_profile
-  has_many :chats
-  has_many :authored_conversations, class_name: 'Chat', foreign_key: 'sender_id'
-  has_many :received_conversations, class_name: 'Chat', foreign_key: 'received_id'
-  has_many :messages, dependent: :destroy
+  has_many :sent_chats, class_name: 'Chat', foreign_key: 'sender_id'
+  has_many :received_chats, class_name: 'Chat', foreign_key: 'receiver_id'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:login]
 
   attr_writer :login
+
+  def chats
+    sent_chats + received_chats 
+  end
 
   def make_profile
     profile = Profile.create(user_id: self.id)

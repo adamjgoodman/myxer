@@ -1,3 +1,26 @@
-<% @chats.each do |chat| %>
-  <%= chat.sender_id %>
-<% end %>
+  <% @chats.each do |chat| %>
+    <%= link_to chat_path(chat) do %>
+      <div class="mt-4 container w-2/3 pt-6 pl-10 pr-10 pb-8 mx-auto bg-white bg-opacity-75 border-solid border border-gray-400 rounded">
+        <% if chat.sender.id == current_user.id %>
+          <% @user = User.find_by(id: chat.receiver_id) %>
+          <% if chat.sender_unreads != nil %>
+            <i class="align-middle text-2xl fas fa-exclamation text-teal-500"></i>
+          <% end %>
+          <span class="align-middle text-xl text-teal-500 font-bold ml-4"><%= @user.username %></span>
+        <% else %>
+          <% @user = User.find_by(id: chat.sender_id) %>
+          <% if chat.receiver_id != nil %>
+            <i class="align-middle text-2xl fas fa-exclamation text-teal-500"></i>
+          <% end %>
+          <span class="align-middle text-xl text-teal-500 font-bold ml-4"><%= @user.username %></span>
+        <% end %>
+        <div class="items-end text-xs bg-gray-100 text-gray-500 border border-solid border-gray-500 rounded text-left mt-2 ml-5 py-2 px-2">
+          <%= chat.messages.last.body %>
+          <br />
+          <span class="pb-2 text-right mr-1 align-top pt-4 text-gray-500", style="font-size:10px;">
+            <%= chat.messages.last.created_at.strftime('%B %d, %Y, %l:%M%p') %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+  <% end %>

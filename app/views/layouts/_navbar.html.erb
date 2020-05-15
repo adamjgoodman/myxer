@@ -14,7 +14,10 @@
     <% if user_signed_in? %>
       <div class="text-sm lg:flex-grow">
         <%= link_to 'My Profile', user_path(current_user), class: "block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4" %>
-        <%= link_to 'Inbox', chats_path, class: "block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4" %>
+        <%= link_to 'Inbox', chats_path, class: "block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-0" %>
+        <% unless current_user.unread == nil || 0 %>
+          <sup class="text-white font-bold ml-0">You've Got Mail! [<%= current_user.unread %>]</sup>
+        <% end %>
       </div>
     <% end %>
     
