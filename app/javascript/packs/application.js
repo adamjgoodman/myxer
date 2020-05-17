@@ -18,3 +18,4 @@
 import "../css/application.css"
 import "./navbar.js"
 import "./profiles.js"
+import "./inbox.js"

@@ -3,7 +3,7 @@
   <% current_user.save! %>
   <% @chat.sender_unreads = nil %>
   <% @chat.save! %>
-<% elsif @chat.receiver_unreads != nil %>
+<% elsif current_user.id == @chat.receiver_id && @chat.receiver_unreads != nil %>
   <% current_user.unread = current_user.unread - @chat.receiver_unreads %>
   <% current_user.save! %>
   <% @chat.receiver_unreads = nil %>

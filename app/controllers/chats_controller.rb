@@ -3,6 +3,8 @@ class ChatsController < ApplicationController
 
   def index
     @chats = current_user.chats
+    @chats.sort_by { |chat| chat.messages.last.created_at }
+    @chats.reverse!
   end
 
   def new 
@@ -15,13 +17,13 @@ class ChatsController < ApplicationController
       redirect_to root_path, alert: 'Not allowed.'
     end
     @message = Message.new
-    @messages = @chat.messages.order('created_at DESC').reverse
+    @messages = @chat.messages.order("created_at ASC")
   end
 
   def create
     @chat = Chat.create(chat_params)
     if @chat.valid?
-      redirect_to user_path(@chat.receiver_id)
+      redirect_to request.referrer
     end
   end
 
@@ -34,8 +36,8 @@ class ChatsController < ApplicationController
 
   private
 
-  def chat_params 
-    params.require(:chat).permit(:sender_id, :receiver_id, :first_message)
+  def chat_params
+    params.require(:chat).permit(:sender_id, :receiver_id, :first_message, :receiver_username)
   end
 
 end

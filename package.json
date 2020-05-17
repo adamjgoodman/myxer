@@ -4,6 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "^5.1.1",
     "jquery": "^3.5.1",
+    "js-autocomplete": "^1.0.4",
     "tailwindcss": "~1.0.0"
   },
   "devDependencies": {

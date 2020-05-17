@@ -1,26 +1,59 @@
-  <% @chats.each do |chat| %>
-    <%= link_to chat_path(chat) do %>
-      <div class="mt-4 container w-2/3 pt-6 pl-10 pr-10 pb-8 mx-auto bg-white bg-opacity-75 border-solid border border-gray-400 rounded">
-        <% if chat.sender.id == current_user.id %>
-          <% @user = User.find_by(id: chat.receiver_id) %>
-          <% if chat.sender_unreads != nil %>
-            <i class="align-middle text-2xl fas fa-exclamation text-teal-500"></i>
-          <% end %>
-          <span class="align-middle text-xl text-teal-500 font-bold ml-4"><%= @user.username %></span>
-        <% else %>
-          <% @user = User.find_by(id: chat.sender_id) %>
-          <% if chat.receiver_id != nil %>
-            <i class="align-middle text-2xl fas fa-exclamation text-teal-500"></i>
-          <% end %>
-          <span class="align-middle text-xl text-teal-500 font-bold ml-4"><%= @user.username %></span>
+<h1 class="container mx-auto w-3/4 pl-24 pt-1 font-bold text-4xl text-teal-500">
+<i class="fas fa-sm fa-envelope mr-2"></i> Inbox
+</h1>
+
+<div class="container mx-auto w-3/4 pl-24 pt-1 font-bold text-lg text-teal-500">
+  <button id="new_message" class="font-bold"><i class="fas fa-paper-plane mr-3"></i>New Message<button>
+</div>
+
+<% if @chats.empty? %>
+  <div class="mt-4 container w-2/3 pt-8 pl-10 pr-10 pb-8 mx-auto bg-white bg-opacity-75 border-solid border border-gray-400 rounded">
+    <span class="align-middle text-xl text-teal-500 font-bold ml-10 pl-2">
+      <i class="mr-1 fas fa-lg fa-heart-broken"></i>
+      Just because you have no messages doesn't mean you should message your ex
+    </span>
+  </div>
+<% end %>
+
+<% @chats.each do |chat| %>
+  <%= link_to chat_path(chat) do %>
+    <div class="mt-4 container w-2/3 pt-6 pl-10 pr-10 pb-8 mx-auto bg-white bg-opacity-75 border-solid border border-gray-400 rounded">
+      <% if chat.sender.id == current_user.id %>
+        <% @user = User.find_by(id: chat.receiver_id) %>
+        <% if chat.sender_unreads != nil %>
+          <i class="align-middle text-2xl fas fa-exclamation text-teal-500"></i>
         <% end %>
-        <div class="items-end text-xs bg-gray-100 text-gray-500 border border-solid border-gray-500 rounded text-left mt-2 ml-5 py-2 px-2">
-          <%= chat.messages.last.body %>
-          <br />
-          <span class="pb-2 text-right mr-1 align-top pt-4 text-gray-500", style="font-size:10px;">
-            <%= chat.messages.last.created_at.strftime('%B %d, %Y, %l:%M%p') %>
-          </span>
-        </div>
+        <span class="align-middle text-xl text-teal-500 font-bold ml-4"><%= @user.username %></span>
+      <% elsif chat.receiver.id == current_user.id %>
+        <% @user = User.find_by(id: chat.sender_id) %>
+        <% if chat.receiver_unreads != nil %>
+          <i class="align-middle text-2xl fas fa-exclamation text-teal-500"></i>
+        <% end %>
+        <span class="align-middle text-xl text-teal-500 font-bold ml-4"><%= @user.username %></span>
+      <% end %>
+      <div class="items-end text-xs bg-gray-100 text-gray-500 border border-solid border-gray-500 rounded text-left mt-2 ml-5 py-2 px-2">
+        <%= chat.messages.last.body %>
+        <br />
+        <span class="pb-2 text-right mr-1 align-top pt-4 text-gray-500", style="font-size:10px;">
+          <%= chat.messages.last.created_at.strftime('%B %d, %Y, %l:%M%p') %>
+        </span>
       </div>
-    <% end %>
+    </div>
   <% end %>
+<% end %>
+
+<div class="new_message_box hidden modal-overlay absolute rounded-lg w-full h-full bg-gray-200 opacity-75"></div>
+  <div class="new_message_box inline rounded px-8 pt-6 pb-8 mb-4 text-center" style="display: contents;"> 
+    <div class="pt-10 pb-10 new_message_box modal mx-auto object-center hidden bg-white rounded-lg">
+      <i id="up-close" class="fas fa-window-close text-teal-500 text-3xl cursor-pointer", style="margin-left:85%;"></i>
+      <h1 class="text-teal-500 text-xl ml-20 pl-2 mb-4 text-left font-bold">Send Message To:</h1>
+      <%= form_with model: Chat.new do |form| %>
+          <%= form.hidden_field :sender_id, value: current_user.id %>
+          <%= form.text_field :receiver_username, class: 'mb-6 p-2 rounded bg-gray-200 w-3/4' %>
+          <%= form.text_area :first_message, placeholder: 'Say a few words...', class: 'p-2 rounded bg-gray-200 w-3/4', style: 'height: 100px;' %>
+          <br />
+          <%= form.submit 'Send', remote: true, class:'cursor-pointer mt-2 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-full' %>
+      <% end %>
+    </div>
+  </div>
+</div>
