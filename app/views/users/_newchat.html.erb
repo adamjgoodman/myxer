@@ -6,6 +6,7 @@
       <%= form_with model: @chat do |form| %>
         <%= form.hidden_field :sender_id, value: current_user.id %>
         <%= form.hidden_field :receiver_id, value: @profile.user_id %>
+        <%= form.hidden_field :receiver_username, value: User.find_by(id: @profile.user_id).username %>
         <%= form.text_area :first_message, placeholder: 'Say a few words...', class: 'p-2 rounded bg-gray-200 w-3/4', style: 'height: 100px;' %>
         <br />
         <%= form.submit 'Send', remote: true, class:'cursor-pointer mt-2 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-full' %>
