@@ -69,3 +69,7 @@ gem 'font_awesome5_rails'
 gem 'devise'
 
 gem 'jquery-rails'
+
+gem 'dotenv-rails', groups: [:development, :test], require: 'dotenv/rails-now'
+
+gem 'httparty'
