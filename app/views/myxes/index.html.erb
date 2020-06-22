@@ -4,7 +4,7 @@
   });
 </script>
 
-<% data = HTTParty.get('https://www.instagram.com/textsfromyourex/?__a=1') %>
+<% data = HTTParty.get('http://www.instagram.com/textsfromyourex/?__a=1') %>
 <% data = data.body %>
 <% data = JSON.parse(data) %>
 <% @data = data["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"] %>
